@@ -7,8 +7,8 @@ class BinaryTreeNode {
 
   add(node) {
     //implement
-    // if left is null, go to left. if left is not null, then right is null
-    // if right is null, go to right
+    // if left is null, go to left if value is less than this value. then repeat in left node
+    // otherwise go right
     if (this.node.value === this.value) return;
     if (node.value < this.value && !this.left) {
       this.left = node;
@@ -33,10 +33,19 @@ class PersonTreeNode {
 
   add(node) {
     //implement
-    if (!this.left) {
+    // if left is null, go to left if value is less than this value. then repeat in left node
+    // otherwise go right
+    if (this.node.value === this.value) return;
+    if (node.value < this.value && !this.left) {
+      this.left = node;
+    } else {
       this.left.add(node);
     }
-    this.right.add(node);
+    if (!this.right) {
+      this.right = node;
+    } else {
+      this.right.add(node);
+    }
   }
 
   findPerson(name) {
@@ -44,14 +53,10 @@ class PersonTreeNode {
     // if not root, then check left
     // if not left, then check right
     if (name === this.value) {
-      return this.person || null;
-    } else if (!name === this.value) {
-      this.left.findPerson(name);
-      return this.person || null;
-    } else {
-      this.right.findPerson(name);
-      return this.person || null;
+      return this.person;
     }
+    const dir = node.value < this.value ? "left" : "right";
+    return this[dir].findPerson(name);
   }
 }
 
