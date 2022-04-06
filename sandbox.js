@@ -9,10 +9,17 @@ class BinaryTreeNode {
     //implement
     // if left is null, go to left. if left is not null, then right is null
     // if right is null, go to right
-    if (!this.left) {
+    if (this.node.value === this.value) return;
+    if (node.value < this.value && !this.left) {
       this.left = node;
+    } else {
+      this.left.add(node);
     }
-    this.right.add(node);
+    if (!this.right) {
+      this.right = node;
+    } else {
+      this.right.add(node);
+    }
   }
 }
 
@@ -27,7 +34,7 @@ class PersonTreeNode {
   add(node) {
     //implement
     if (!this.left) {
-      this.left = node;
+      this.left.add(node);
     }
     this.right.add(node);
   }
